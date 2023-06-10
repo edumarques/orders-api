@@ -1,0 +1,24 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\EventListener\ApiExceptionEventListener:
+        arguments:
+            - '@translator'
+            - '@App\Util\EnvironmentUtil'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    App\Util\EnvironmentUtil:
+        arguments:
+            - '%kernel.environment%'
