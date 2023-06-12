@@ -1,11 +1,14 @@
-version: 2
+version: 2.1
+
+orbs:
+    codecov: codecov/codecov@3.2.5
 
 jobs:
     build:
         docker:
             -   image: cimg/php:8.2
         steps:
-            - checkout
+            -   checkout
             -   run: sudo apt update
             -   restore_cache:
                     keys:
@@ -18,6 +21,4 @@ jobs:
                         - ./vendor
             -   run: ./bin/phpunit
             -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml --coverage-html coverage/html
-            -   run: curl -Os https://uploader.codecov.io/latest/linux/codecov
-            -   run: sudo chmod +x codecov
-            -   run: ./codecov
+            -   codecov/upload
