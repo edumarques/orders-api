@@ -1,7 +1,4 @@
-version: 2.1
-
-orbs:
-    codecov: codecov/codecov@3.2.5
+version: 2
 
 jobs:
     build:
@@ -20,6 +17,7 @@ jobs:
                     key: v1-dependencies-{{ checksum "composer.lock" }}
                     paths:
                         - ./vendor
-            -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml
-            -   codecov/upload:
-                    file: ./coverage/clover/clover.xml
+            -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml --coverage-html coverage/html
+            -   run: curl -Os https://uploader.codecov.io/latest/linux/codecov
+            -   run: sudo chmod +x codecov
+            -   run: ./codecov
