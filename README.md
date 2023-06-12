@@ -4,6 +4,10 @@
 
 Simple API that manages placement of orders. It also supports voucher handling.
 
+![GitHub](https://img.shields.io/github/license/edumarques/typed-collections)
+[![edumarques](https://circleci.com/gh/edumarques/orders-api.svg?style=shield)](https://app.circleci.com/pipelines/github/edumarques)
+[![codecov](https://codecov.io/gh/edumarques/orders-api/branch/main/graph/badge.svg?token=ABGMyvr355)](https://codecov.io/gh/edumarques/orders-api)
+
 </div>
 
 ## Installation
