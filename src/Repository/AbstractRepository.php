@@ -33,7 +33,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Rep
         $return = $this->find($id, $lockMode, $lockVersion);
 
         if (null === $return && $throw) {
-            throw EntityNotFoundException::fromClassNameAndIdentifier(static::class, [$id]);
+            throw EntityNotFoundException::fromClassNameAndIdentifier(static::class, [(string) $id]);
         }
 
         return $return;

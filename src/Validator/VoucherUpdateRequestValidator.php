@@ -9,7 +9,7 @@ use App\Exception\ApiHttpExceptionInterface;
 use App\Exception\InvalidRequestDataException;
 use App\Repository\VoucherRepositoryInterface;
 use App\ValueObject\RequestDataInterface;
-use App\ValueObject\VoucherRemovalRequestData;
+use App\ValueObject\VoucherUpdateRequestData;
 use Ramsey\Uuid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -23,7 +23,7 @@ final readonly class VoucherUpdateRequestValidator extends AbstractRequestValida
     }
 
     /**
-     * @param VoucherRemovalRequestData $requestData
+     * @param VoucherUpdateRequestData $requestData
      *
      * @throws ApiHttpExceptionInterface
      */
