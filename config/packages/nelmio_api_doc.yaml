@@ -1,0 +1,212 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Orders API
+            description: Simple API that manages placement of orders. It also supports voucher handling.
+            version: 1.0.0
+        components:
+            schemas:
+                SuccessfulResponse:
+                    type: object
+                    required:
+                        - status
+                        - message
+                        - data
+                        - pagination
+                    properties:
+                        status:
+                            type: string
+                            default: success
+                        message:
+                            type: string
+                        data:
+                            default: null
+                        pagination:
+                            default: null
+                SuccessfulResponseWithData:
+                    type: object
+                    required:
+                        - status
+                        - message
+                        - data
+                        - pagination
+                    properties:
+                        status:
+                            type: string
+                            default: success
+                        message:
+                            default: null
+                        data:
+                            type: object
+                        pagination:
+                            default: null
+                SuccessfulResponseWithDataPaginated:
+                    type: object
+                    required:
+                        - status
+                        - message
+                        - data
+                        - pagination
+                    properties:
+                        status:
+                            type: string
+                            default: success
+                        message:
+                            type: string
+                            nullable: true
+                            default: null
+                        data:
+                            type: object
+                        pagination:
+                            type: object
+                            required:
+                                - pageNumber
+                                - pageSize
+                                - totalOfItems
+                                - numberOfPages
+                            properties:
+                                pageNumber:
+                                    type: number
+                                    default: 1
+                                pageSize:
+                                    type: number
+                                    default: 10
+                                totalOfItems:
+                                    type: number
+                                numberOfPages:
+                                    type: number
+                FailedResponseForBadRequest:
+                    type: object
+                    required:
+                        - status
+                        - message
+                        - data
+                        - pagination
+                    properties:
+                        status:
+                            type: string
+                            default: error
+                        message:
+                            type: string
+                        data:
+                            default: null
+                        pagination:
+                            default: null
+                        exception:
+                            description: Not available in production environment
+                            type: string
+                        exceptionTrace:
+                            description: Not available in production environment
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    line:
+                                        type: number
+                                    class:
+                                        type: string
+                FailedResponseForInternalError:
+                    type: object
+                    required:
+                        - status
+                        - message
+                        - data
+                        - pagination
+                    properties:
+                        status:
+                            type: string
+                            default: error
+                        message:
+                            type: string
+                        data:
+                            default: null
+                        pagination:
+                            default: null
+                        exceptionMessage:
+                            description: Not available in production environment
+                            type: string
+                        exceptionTrace:
+                            description: Not available in production environment
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    line:
+                                        type: number
+                                    class:
+                                        type: string
+                Pagination:
+                    type: object
+                    required:
+                        - pageNumber
+                        - pageSize
+                        - totalOfItems
+                        - numberOfPages
+                    properties:
+                        pageNumber:
+                            type: number
+                            default: 1
+                        pageSize:
+                            type: number
+                            default: 10
+                        totalOfItems:
+                            type: number
+                        numberOfPages:
+                            type: number
+            parameters:
+                PageSize:
+                    name: pageSize
+                    in: query
+                    schema:
+                        type: integer
+                PageNumber:
+                    name: pageNumber
+                    in: query
+                    schema:
+                        type: integer
+            responses:
+                Ok:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessfulResponse'
+                OkWithData:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessfulResponseWithData'
+                OkWithDataPaginated:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessfulResponseWithDataPaginated'
+                BadRequest:
+                    description: Bad request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FailedResponseForBadRequest'
+                NotFound:
+                    description: Data not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FailedResponseForBadRequest'
+                MethodNotAllowed:
+                    description: Method not allowed
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FailedResponseForBadRequest'
+                InternalError:
+                    description: Unexpected internal error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FailedResponseForInternalError'
+    areas:
+        path_patterns:
+            - ^/(?!(doc.json|doc|_))

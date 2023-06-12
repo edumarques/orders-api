@@ -1,0 +1,28 @@
+exception:
+    message:
+        global: An unexpected error occurred
+        global_detailed: 'An unexpected error occurred. Error message: "%error_message%"'
+        request_data_not_validated: The request data has not been validated
+response:
+    error:
+        validation:
+            voucher:
+                type_must_be_provided_and_valid: Voucher type must be provided and valid
+                discount_must_be_provided_and_valid: Voucher discount must be provided and valid
+                expiration_date_must_have_a_valid_format: Voucher expiration data must have a valid format
+                uuid_must_be_provided_and_valid: Voucher UUID must be provided and valid
+                not_found_for_provided_uuid: Voucher not found for provided UUID
+                must_be_active_to_be_updated: Voucher must be active to be updated
+            order:
+                amount_must_be_provided_and_valid: Order amount must be provided and valid
+                voucher_uuid_is_not_valid: Order voucher is not valid
+                voucher_not_found: Order voucher not found
+                voucher_already_used: Order voucher has been already used
+                voucher_expired: Order voucher has expired
+    success:
+        voucher:
+            created_successfully: Voucher created successfully
+            updated_successfully: Voucher updated successfully
+            removed_successfully: Voucher removed successfully
+        order:
+            created_successfully: Order created successfully

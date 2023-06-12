@@ -72,7 +72,7 @@ phpstan: ## Run PHPStan
 lint: phpcs phpstan ## Run PHP Code Sniffer and PHPStan
 
 test: ## Run tests, pass the parameter "args=" to run the command with arguments or options
-	@$(PHP) vendor/bin/simple-phpunit $(args)
+	@$(PHP) bin/phpunit $(args)
 
 test-cov: ## Run tests and generate coverage report
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php vendor/bin/simple-phpunit --coverage-clover coverage/clover/clover.xml --coverage-html coverage/html
@@ -89,3 +89,9 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+migrations-diff: c=doctrine:migrations:diff ## Generate diff of migrations based on entities
+migrations-diff: sf
+
+migrations-migrate: c=doctrine:migrations:migrate ## Execute all migrations
+migrations-migrate: sf

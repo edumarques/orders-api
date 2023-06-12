@@ -9,17 +9,38 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "ext-xml": "*",
         "ext-intl": "*",
+        "ext-json": "*",
+        "ext-pdo_mysql": "*",
+        "ext-xml": "*",
+        "doctrine/doctrine-bundle": "2.10.*",
+        "doctrine/doctrine-migrations-bundle": "3.2.*",
+        "doctrine/orm": "2.15.*",
+        "edumarques/typed-collections": "1.0.*",
+        "knplabs/knp-paginator-bundle": "6.2.*",
+        "nelmio/api-doc-bundle": "4.11.*",
+        "ramsey/uuid-doctrine": "2.0.*",
+        "stof/doctrine-extensions-bundle": "1.7.*",
+        "symfony/asset": "6.3.*",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "2.3.*",
         "symfony/framework-bundle": "6.3.*",
+        "symfony/monolog-bundle": "3.8.*",
         "symfony/runtime": "6.3.*",
         "symfony/translation": "6.3.*",
-        "symfony/yaml": "6.3.*"
+        "symfony/twig-bundle": "6.3.*",
+        "symfony/yaml": "6.3.*",
+        "twig/extra-bundle": "3.6.*",
+        "twig/twig": "3.6.*"
     },
     "require-dev": {
+        "phpstan/phpstan": "1.10.*",
+        "phpunit/phpunit": "9.6.*",
+        "squizlabs/php_codesniffer": "4.0.x-dev",
+        "symfony/browser-kit": "6.3.*",
+        "symfony/css-selector": "6.3.*",
+        "symfony/phpunit-bridge": "6.3.*",
         "symfony/stopwatch": "6.3.*",
         "symfony/web-profiler-bundle": "6.3.*"
     },
@@ -33,7 +54,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "App\\Migrations\\": "migrations/"
         }
     },
     "autoload-dev": {

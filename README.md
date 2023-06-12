@@ -1,7 +1,8 @@
 <div align="center">
 
 # Orders API
-Simple API that manages placement of orders. It also supports issuing and handling vouchers.
+
+Simple API that manages placement of orders. It also supports voucher handling.
 
 </div>
 
@@ -10,18 +11,47 @@ Simple API that manages placement of orders. It also supports issuing and handli
 The project can be installed and run using *Docker* and *docker-compose*.
 To install *Docker*, visit its [official page](https://docs.docker.com/engine/install/).
 And to install *docker-compose*, follow [these steps](https://docs.docker.com/compose/install/).
-To help manage the project and execute commands in an easier way,
+To help manage the project and execute commands in an quicker way,
 there is a set of [Make](https://www.gnu.org/software/make/) targets already configured.
 
-Set up and run the project just by running the following command:
+Set up and run the project just by running one of the following sets of commands:
 
 ```sh
 make start
 ```
 
+or
+
+```sh
+sh docker/setup.sh
+docker-compose build --pull --no-cache
+docker-compose up --detach
+```
+
+## Documentation
+
+There two endpoints that provide the API documentation, after running the project. We use Swagger and OpenAPI
+specification.
+
+Interactive documentation:
+
+```text
+/doc
+```
+
+JSON documentation:
+
+```text
+/doc.json
+```
+
+#### There is also a [Postman collection](./docs/postman_collection.json) already set up.
+
+#### The current API's database model is represented in this [ER diagram](./docs/er_diagram.png).
+
 ## Useful tips
 
-### List of available commands
+#### List of available commands using *Make*:
 
 ```text
  👷 Makefile               
@@ -53,4 +83,6 @@ composer                       Run composer, pass the parameter "c=" to run a gi
  🎶 Symfony                
 sf                             List all Symfony commands or pass the parameter "c=" to run a given command, example: make sf c=about
 cc                             Clear the cache
+migrations-diff                Generate diff of migrations based on entities
+migrations-migrate             Execute all migrations
 ```

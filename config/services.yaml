@@ -12,6 +12,14 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Controller\OrderController:
+        arguments:
+            - '@App\Service\OrderService'
+
+    App\Controller\VoucherController:
+        arguments:
+            - '@App\Service\VoucherService'
+
     App\EventListener\ApiExceptionEventListener:
         arguments:
             - '@translator'
