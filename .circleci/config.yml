@@ -6,7 +6,7 @@ orbs:
 jobs:
     build:
         docker:
-            -   image: cimg/php:8.2
+            -   image: circleci/php:8.2
         steps:
             -   checkout
             -   run: sudo apt update
@@ -19,7 +19,6 @@ jobs:
                     key: v1-dependencies-{{ checksum "composer.lock" }}
                     paths:
                         - ./vendor
-            -   run: ./bin/phpunit
             -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml
             -   codecov/upload:
-                    file: coverage/clover/clover.xml
+                    file: ./coverage/clover/clover.xml
