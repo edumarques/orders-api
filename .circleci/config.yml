@@ -21,4 +21,5 @@ jobs:
                         - ./vendor
             -   run: ./bin/phpunit
             -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml
-            -   codecov/upload -f
+            -   codecov/upload:
+                    file: coverage/clover/clover.xml
