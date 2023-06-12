@@ -1,0 +1,23 @@
+version: 2
+
+jobs:
+    build:
+        docker:
+            -   image: circleci/php:8.2-node-browsers
+        steps:
+            - checkout
+            -   run: sudo apt update
+            -   restore_cache:
+                    keys:
+                        - v1-dependencies-{{ checksum "composer.lock" }}
+                        - v1-dependencies-
+            -   run: composer install -n --prefer-dist
+            -   save_cache:
+                    key: v1-dependencies-{{ checksum "composer.lock" }}
+                    paths:
+                        - ./vendor
+            -   run: ./bin/phpunit
+            -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml --coverage-html coverage/html
+            -   run: curl -Os https://uploader.codecov.io/latest/linux/codecov
+            -   run: sudo chmod +x codecov
+            -   run: ./codecov
