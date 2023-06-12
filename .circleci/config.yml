@@ -20,5 +20,5 @@ jobs:
                     paths:
                         - ./vendor
             -   run: ./bin/phpunit
-            -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml --coverage-html coverage/html
-            -   codecov/upload
+            -   run: ./bin/phpunit --coverage-clover coverage/clover/clover.xml
+            -   codecov/upload -f
