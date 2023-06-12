@@ -8,6 +8,7 @@ use App\Validator\OrderListRequestValidator;
 use App\ValueObject\OrderListRequestData;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class OrderListRequestValidatorTest extends TestCase
@@ -18,7 +19,8 @@ final class OrderListRequestValidatorTest extends TestCase
 
     public function testValidate(): void
     {
-        $requestData = OrderListRequestData::create();
+        $request = new Request();
+        $requestData = OrderListRequestData::createFromRequest($request);
 
         $this->translator->expects($this->never())->method($this->anything());
 

@@ -8,6 +8,7 @@ use App\Validator\VoucherListRequestValidator;
 use App\ValueObject\VoucherListRequestData;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class VoucherListRequestValidatorTest extends TestCase
@@ -18,7 +19,8 @@ final class VoucherListRequestValidatorTest extends TestCase
 
     public function testValidate(): void
     {
-        $requestData = VoucherListRequestData::create();
+        $request = new Request();
+        $requestData = VoucherListRequestData::createFromRequest($request);
 
         $this->translator->expects($this->never())->method($this->anything());
 

@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class VoucherCreationRequestData extends AbstractRequestData
 {
-    private ?VoucherTypeEnum $type = null;
+    private VoucherTypeEnum|false|null $type = null;
 
-    private ?float $discount = null;
+    private float|false|null $discount = null;
 
     private \DateTimeInterface|false|null $expirationDate = null;
 
     /**
      * @codeCoverageIgnore
      */
-    public function getType(): ?VoucherTypeEnum
+    public function getType(): VoucherTypeEnum|false|null
     {
         return $this->type;
     }
@@ -28,7 +28,7 @@ final class VoucherCreationRequestData extends AbstractRequestData
     /**
      * @codeCoverageIgnore
      */
-    public function setType(?VoucherTypeEnum $type): self
+    public function setType(VoucherTypeEnum|false|null $type): self
     {
         $this->type = $type;
 
@@ -38,7 +38,7 @@ final class VoucherCreationRequestData extends AbstractRequestData
     /**
      * @codeCoverageIgnore
      */
-    public function getDiscount(): ?float
+    public function getDiscount(): float|false|null
     {
         return $this->discount;
     }
@@ -46,7 +46,7 @@ final class VoucherCreationRequestData extends AbstractRequestData
     /**
      * @codeCoverageIgnore
      */
-    public function setDiscount(?float $discount): self
+    public function setDiscount(float|false|null $discount): self
     {
         $this->discount = $discount;
 
@@ -77,10 +77,14 @@ final class VoucherCreationRequestData extends AbstractRequestData
 
         $payload = self::getPayloadFromRequest($request);
 
-        $type = VoucherTypeEnum::tryFrom($payload[VoucherEnum::TYPE->value] ?? '');
+        try {
+            $type = VoucherTypeEnum::from($payload[VoucherEnum::TYPE->value] ?? '');
+        } catch (\ValueError) {
+            $type = false;
+        }
 
         $discount = $payload[VoucherEnum::DISCOUNT->value] ?? null;
-        $discount = is_numeric($discount) ? (float) $discount : null;
+        $discount = is_numeric($discount) ? (float) $discount : false;
 
         $expirationDateString = $payload[VoucherEnum::EXPIRATION_DATE->value] ?? null;
 

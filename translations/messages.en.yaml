@@ -8,7 +8,9 @@ response:
         validation:
             voucher:
                 type_must_be_provided_and_valid: Voucher type must be provided and valid
+                type_must_be_valid: Voucher type must be valid
                 discount_must_be_provided_and_valid: Voucher discount must be provided and valid
+                discount_must_be_valid: Voucher discount must be valid
                 expiration_date_must_have_a_valid_format: Voucher expiration data must have a valid format
                 uuid_must_be_provided_and_valid: Voucher UUID must be provided and valid
                 not_found_for_provided_uuid: Voucher not found for provided UUID

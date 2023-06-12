@@ -18,7 +18,9 @@ final readonly class VoucherCreationRequestValidator extends AbstractRequestVali
      */
     public function validate(RequestDataInterface $requestData): void
     {
-        if (null === $requestData->getType()) {
+        $type = $requestData->getType();
+
+        if (null === $type || false === $type) {
             throw (new InvalidRequestDataException())->setJsonMessage(
                 $this->translator->trans('response.error.validation.voucher.type_must_be_provided_and_valid')
             );
@@ -32,7 +34,7 @@ final readonly class VoucherCreationRequestValidator extends AbstractRequestVali
 
         $discount = $requestData->getDiscount();
 
-        if (null === $discount || 0 > $discount) {
+        if (null === $discount || false === $discount || 0 > $discount) {
             throw (new InvalidRequestDataException())->setJsonMessage(
                 $this->translator->trans('response.error.validation.voucher.discount_must_be_provided_and_valid')
             );

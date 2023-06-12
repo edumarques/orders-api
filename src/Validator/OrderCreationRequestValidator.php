@@ -31,7 +31,7 @@ final readonly class OrderCreationRequestValidator extends AbstractRequestValida
     {
         $amount = $requestData->getAmount();
 
-        if (null === $amount || 0 > $amount) {
+        if (null === $amount || false === $amount || 0 > $amount) {
             throw (new InvalidRequestDataException())->setJsonMessage(
                 $this->translator->trans('response.error.validation.order.amount_must_be_provided_and_valid')
             );

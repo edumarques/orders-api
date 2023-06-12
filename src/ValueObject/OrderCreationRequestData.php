@@ -9,14 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class OrderCreationRequestData extends AbstractRequestData
 {
-    private ?float $amount = null;
+    private float|false|null $amount = null;
 
     private ?string $voucherUuid = null;
 
     /**
      * @codeCoverageIgnore
      */
-    public function getAmount(): ?float
+    public function getAmount(): float|false|null
     {
         return $this->amount;
     }
@@ -24,7 +24,7 @@ final class OrderCreationRequestData extends AbstractRequestData
     /**
      * @codeCoverageIgnore
      */
-    public function setAmount(?float $amount): self
+    public function setAmount(float|false|null $amount): self
     {
         $this->amount = $amount;
 
@@ -56,7 +56,7 @@ final class OrderCreationRequestData extends AbstractRequestData
         $payload = self::getPayloadFromRequest($request);
 
         $amount = $payload[OrderEnum::AMOUNT->value] ?? null;
-        $amount = is_numeric($amount) ? (float) $amount : null;
+        $amount = null !== $amount && false === is_float($amount) ? false : $amount;
 
         $voucherUuid = $payload[OrderEnum::VOUCHER_UUID->value] ?? null;
 

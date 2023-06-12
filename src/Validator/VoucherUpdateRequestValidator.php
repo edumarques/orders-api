@@ -52,6 +52,24 @@ final readonly class VoucherUpdateRequestValidator extends AbstractRequestValida
             );
         }
 
+        if (false === $requestData->getType()) {
+            throw (new InvalidRequestDataException())->setJsonMessage(
+                $this->translator->trans('response.error.validation.voucher.type_must_be_valid')
+            );
+        }
+
+        if (false ===  $requestData->getDiscount()) {
+            throw (new InvalidRequestDataException())->setJsonMessage(
+                $this->translator->trans('response.error.validation.voucher.discount_must_be_valid')
+            );
+        }
+
+        if (false === $requestData->getExpirationDate()) {
+            throw (new InvalidRequestDataException())->setJsonMessage(
+                $this->translator->trans('response.error.validation.voucher.expiration_date_must_have_a_valid_format')
+            );
+        }
+
         $requestData->setValid(true);
     }
 }
