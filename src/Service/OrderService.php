@@ -34,14 +34,13 @@ final readonly class OrderService extends AbstractApiHttpService implements Orde
     {
         $this->validateRequestData($requestData);
 
+        $orderAmount = $requestData->getAmount();
         $voucherUuid = $requestData->getVoucherUuid();
 
         /** @var Voucher|null $voucher */
         $voucher = null !== $voucherUuid
             ? $this->voucherRepository->findOneBy(['uuid' => $voucherUuid])
             : null;
-
-        $orderAmount = $requestData->getAmount();
 
         if (null !== $voucher) {
             $voucherDiscount = $voucher->getDiscount();

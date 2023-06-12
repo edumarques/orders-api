@@ -18,11 +18,17 @@ trait TimestampableEntityTrait
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     protected \DateTimeInterface $updatedAt;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;

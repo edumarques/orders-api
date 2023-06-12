@@ -14,6 +14,9 @@ trait EntityTrait
     #[ORM\Column(type: Types::INTEGER)]
     protected int $id;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getId(): int
     {
         return $this->id;

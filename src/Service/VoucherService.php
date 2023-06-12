@@ -79,12 +79,13 @@ final readonly class VoucherService extends AbstractApiHttpService implements Vo
     {
         $this->validateRequestData($requestData);
 
-        /** @var Voucher $voucher */
-        $voucher = $this->voucherRepository->findOneBy(['uuid' => $requestData->getUuid()]);
-
+        $uuid = $requestData->getUuid();
         $type = $requestData->getType();
         $discount = $requestData->getDiscount();
         $expirationDate = $requestData->getExpirationDate();
+
+        /** @var Voucher $voucher */
+        $voucher = $this->voucherRepository->findOneBy(['uuid' => $uuid]);
 
         if (false === empty($type)) {
             $voucher->setType($type);
@@ -112,8 +113,10 @@ final readonly class VoucherService extends AbstractApiHttpService implements Vo
     {
         $this->validateRequestData($requestData);
 
+        $uuid = $requestData->getUuid();
+
         /** @var Voucher $voucher */
-        $voucher = $this->voucherRepository->findOneBy(['uuid' => $requestData->getUuid()]);
+        $voucher = $this->voucherRepository->findOneBy(['uuid' => $uuid]);
 
         $this->voucherRepository->delete($voucher);
 

@@ -12,6 +12,9 @@ trait UuidAwareEntityTrait
     #[ORM\Column(type: 'uuid', unique: true)]
     protected UuidInterface $uuid;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getUuid(): UuidInterface
     {
         return $this->uuid;

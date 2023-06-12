@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Util;
 
-final readonly class EnvironmentUtil
+class EnvironmentUtil
 {
     public function __construct(
-        private string $environment
+        private readonly string $environment
     ) {
     }
 

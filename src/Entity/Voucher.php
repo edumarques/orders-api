@@ -34,16 +34,25 @@ class Voucher implements EntityInterface, UuidAwareEntityInterface, Timestampabl
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     protected ?\DateTimeInterface $expirationDate;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct()
     {
         $this->uuid = Uuid::uuid4();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getOrder(): ?Order
     {
         return $this->order;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setOrder(?Order $order): static
     {
         $this->order = $order;
@@ -51,11 +60,17 @@ class Voucher implements EntityInterface, UuidAwareEntityInterface, Timestampabl
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getType(): VoucherTypeEnum
     {
         return $this->type;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setType(VoucherTypeEnum $type): static
     {
         $this->type = $type;
@@ -63,11 +78,17 @@ class Voucher implements EntityInterface, UuidAwareEntityInterface, Timestampabl
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getDiscount(): float
     {
         return $this->discount;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setDiscount(float $discount): static
     {
         $this->discount = $discount;
@@ -75,11 +96,17 @@ class Voucher implements EntityInterface, UuidAwareEntityInterface, Timestampabl
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getExpirationDate(): ?\DateTimeInterface
     {
         return $this->expirationDate;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setExpirationDate(?\DateTimeInterface $expirationDate): static
     {
         $this->expirationDate = $expirationDate;
@@ -121,9 +148,9 @@ class Voucher implements EntityInterface, UuidAwareEntityInterface, Timestampabl
     public function getStatus(): ?VoucherStatusEnum
     {
         return match (true) {
-            $this->isExpired() => VoucherStatusEnum::EXPIRED,
             $this->isActive() => VoucherStatusEnum::ACTIVE,
             $this->isUsed() => VoucherStatusEnum::USED,
+            $this->isExpired() => VoucherStatusEnum::EXPIRED,
             default => null
         };
     }

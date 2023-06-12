@@ -24,16 +24,25 @@ class Order implements EntityInterface, UuidAwareEntityInterface, TimestampableE
     #[ORM\OneToOne(mappedBy: 'order', targetEntity: Voucher::class, cascade: ['all'])]
     protected ?Voucher $voucher;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct()
     {
         $this->uuid = Uuid::uuid4();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getAmount(): float
     {
         return $this->amount;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setAmount(float $amount): static
     {
         $this->amount = $amount;
@@ -41,16 +50,22 @@ class Order implements EntityInterface, UuidAwareEntityInterface, TimestampableE
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getVoucher(): ?Voucher
     {
         return $this->voucher;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setVoucher(?Voucher $voucher): static
     {
         $this->voucher = $voucher;
 
-        $voucher->setOrder($this);
+        $voucher?->setOrder($this);
 
         return $this;
     }

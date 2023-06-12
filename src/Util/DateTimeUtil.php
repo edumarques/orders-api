@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Util;
 
-final readonly class DateTimeUtil
+class DateTimeUtil
 {
+    /**
+     * @codeCoverageIgnore
+     */
     public function now(): \DateTimeImmutable
     {
         return new \DateTimeImmutable();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Validator;
 
+use App\Entity\Order;
 use App\Entity\Voucher;
 use App\Exception\ApiHttpExceptionInterface;
 use App\Exception\InvalidRequestDataException;
@@ -100,16 +101,16 @@ final class VoucherUpdateRequestValidatorTest extends TestCase
         $request = new Request();
         $requestData = VoucherUpdateRequestData::createFromRequest($request)->setUuid($uuid);
 
-        $voucher = $this->createMock(Voucher::class);
+        $order = new Order();
+
+        $voucher = (new Voucher())
+            ->setOrder($order)
+            ->setExpirationDate(null);
 
         $this->voucherRepository->expects($this->once())
             ->method('findOneBy')
             ->with(['uuid' => $uuid])
             ->willReturn($voucher);
-
-        $voucher->expects($this->once())
-            ->method('isActive')
-            ->willReturn(false);
 
         $this->translator->expects($this->once())
             ->method('trans')
@@ -131,16 +132,14 @@ final class VoucherUpdateRequestValidatorTest extends TestCase
         $request = new Request();
         $requestData = VoucherUpdateRequestData::createFromRequest($request)->setUuid($uuid);
 
-        $voucher = $this->createMock(Voucher::class);
+        $voucher = (new Voucher())
+            ->setOrder(null)
+            ->setExpirationDate(null);
 
         $this->voucherRepository->expects($this->once())
             ->method('findOneBy')
             ->with(['uuid' => $uuid])
             ->willReturn($voucher);
-
-        $voucher->expects($this->once())
-            ->method('isActive')
-            ->willReturn(true);
 
         $this->translator->expects($this->never())->method($this->anything());
 
@@ -158,16 +157,14 @@ final class VoucherUpdateRequestValidatorTest extends TestCase
         $request = new Request(content: '{"type":"REGULAR"}');
         $requestData = VoucherUpdateRequestData::createFromRequest($request)->setUuid($uuid);
 
-        $voucher = $this->createMock(Voucher::class);
+        $voucher = (new Voucher())
+            ->setOrder(null)
+            ->setExpirationDate(null);
 
         $this->voucherRepository->expects($this->once())
             ->method('findOneBy')
             ->with(['uuid' => $uuid])
             ->willReturn($voucher);
-
-        $voucher->expects($this->once())
-            ->method('isActive')
-            ->willReturn(true);
 
         $this->translator->expects($this->once())
             ->method('trans')
@@ -189,16 +186,14 @@ final class VoucherUpdateRequestValidatorTest extends TestCase
         $request = new Request(content: '{"type":"PERCENTAGE", "discount":5}');
         $requestData = VoucherUpdateRequestData::createFromRequest($request)->setUuid($uuid);
 
-        $voucher = $this->createMock(Voucher::class);
+        $voucher = (new Voucher())
+            ->setOrder(null)
+            ->setExpirationDate(null);
 
         $this->voucherRepository->expects($this->once())
             ->method('findOneBy')
             ->with(['uuid' => $uuid])
             ->willReturn($voucher);
-
-        $voucher->expects($this->once())
-            ->method('isActive')
-            ->willReturn(true);
 
         $this->translator->expects($this->once())
             ->method('trans')
@@ -220,16 +215,14 @@ final class VoucherUpdateRequestValidatorTest extends TestCase
         $request = new Request(content: '{"type":"PERCENTAGE", "discount":5.0, "expirationDate":"2023-12"}');
         $requestData = VoucherUpdateRequestData::createFromRequest($request)->setUuid($uuid);
 
-        $voucher = $this->createMock(Voucher::class);
+        $voucher = (new Voucher())
+            ->setOrder(null)
+            ->setExpirationDate(null);
 
         $this->voucherRepository->expects($this->once())
             ->method('findOneBy')
             ->with(['uuid' => $uuid])
             ->willReturn($voucher);
-
-        $voucher->expects($this->once())
-            ->method('isActive')
-            ->willReturn(true);
 
         $this->translator->expects($this->once())
             ->method('trans')
@@ -251,16 +244,14 @@ final class VoucherUpdateRequestValidatorTest extends TestCase
         $request = new Request(content: '{"type":"PERCENTAGE", "discount":5.0, "expirationDate":"2023-12-01"}');
         $requestData = VoucherUpdateRequestData::createFromRequest($request)->setUuid($uuid);
 
-        $voucher = $this->createMock(Voucher::class);
+        $voucher = (new Voucher())
+            ->setOrder(null)
+            ->setExpirationDate(new \DateTimeImmutable());
 
         $this->voucherRepository->expects($this->once())
             ->method('findOneBy')
             ->with(['uuid' => $uuid])
             ->willReturn($voucher);
-
-        $voucher->expects($this->once())
-            ->method('isActive')
-            ->willReturn(true);
 
         $this->translator->expects($this->never())->method($this->anything());
 
